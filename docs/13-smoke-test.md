@@ -16,7 +16,7 @@ kubectl create secret generic abell-kubernetes-tutorial \
 Print a hexdump of the `abell-kubernetes-tutorial` secret stored in etcd:
 
 ```
-gcloud compute ssh controller-0 \
+gcloud compute ssh abell-controller-0 \
   --command "sudo ETCDCTL_API=3 etcdctl get \
   --endpoints=https://127.0.0.1:2379 \
   --cacert=/etc/etcd/ca.pem \

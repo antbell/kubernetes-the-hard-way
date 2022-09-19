@@ -4,10 +4,10 @@ Kubernetes components are stateless and store cluster state in [etcd](https://gi
 
 ## Prerequisites
 
-The commands in this lab must be run on each controller instance: `controller-0`, `controller-1`, and `controller-2`. Login to each controller instance using the `gcloud` command. Example:
+The commands in this lab must be run on each controller instance: `abell-controller-0`, `abell-controller-1`, and `abell-controller-2`. Login to each controller instance using the `gcloud` command. Example:
 
 ```
-gcloud compute ssh controller-0
+gcloud compute ssh abell-controller-0
 ```
 
 ### Running commands in parallel with tmux
@@ -82,7 +82,7 @@ ExecStart=/usr/local/bin/etcd \\
   --listen-client-urls https://${INTERNAL_IP}:2379,https://127.0.0.1:2379 \\
   --advertise-client-urls https://${INTERNAL_IP}:2379 \\
   --initial-cluster-token etcd-cluster-0 \\
-  --initial-cluster controller-0=https://10.240.0.10:2380,controller-1=https://10.240.0.11:2380,controller-2=https://10.240.0.12:2380 \\
+  --initial-cluster abell-controller-0=https://10.240.0.10:2380,abell-controller-1=https://10.240.0.11:2380,abell-controller-2=https://10.240.0.12:2380 \\
   --initial-cluster-state new \\
   --data-dir=/var/lib/etcd
 Restart=on-failure
@@ -103,7 +103,7 @@ EOF
 }
 ```
 
-> Remember to run the above commands on each controller node: `controller-0`, `controller-1`, and `controller-2`.
+> Remember to run the above commands on each controller node: `abell-controller-0`, `abell-controller-1`, and `abell-controller-2`.
 
 ## Verification
 
@@ -120,9 +120,9 @@ sudo ETCDCTL_API=3 etcdctl member list \
 > output
 
 ```
-3a57933972cb5131, started, controller-2, https://10.240.0.12:2380, https://10.240.0.12:2379, false
-f98dc20bce6225a0, started, controller-0, https://10.240.0.10:2380, https://10.240.0.10:2379, false
-ffed16798470cab5, started, controller-1, https://10.240.0.11:2380, https://10.240.0.11:2379, false
+3a57933972cb5131, started, abell-controller-2, https://10.240.0.12:2380, https://10.240.0.12:2379, false
+f98dc20bce6225a0, started, abell-controller-0, https://10.240.0.10:2380, https://10.240.0.10:2379, false
+ffed16798470cab5, started, abell-controller-1, https://10.240.0.11:2380, https://10.240.0.11:2379, false
 ```
 
 Next: [Bootstrapping the Kubernetes Control Plane](08-bootstrapping-kubernetes-controllers.md)

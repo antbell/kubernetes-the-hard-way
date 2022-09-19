@@ -297,7 +297,7 @@ EOF
 List the registered Kubernetes nodes:
 
 ```
-gcloud compute ssh controller-0 \
+gcloud compute ssh abell-controller-0 \
   --command "kubectl get nodes --kubeconfig admin.kubeconfig"
 ```
 

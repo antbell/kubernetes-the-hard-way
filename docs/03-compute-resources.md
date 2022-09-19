@@ -100,7 +100,7 @@ Create three compute instances which will host the Kubernetes control plane:
 
 ```
 for i in 0 1 2; do
-  gcloud compute instances create controller-${i} \
+  gcloud compute instances create abell-controller-${i} \
     --async \
     --boot-disk-size 200GB \
     --can-ip-forward \
@@ -163,10 +163,10 @@ worker-2      us-west1-c  e2-standard-2               10.240.0.22  XX.XXX.XX.XX 
 
 SSH will be used to configure the controller and worker instances. When connecting to compute instances for the first time SSH keys will be generated for you and stored in the project or instance metadata as described in the [connecting to instances](https://cloud.google.com/compute/docs/instances/connecting-to-instance) documentation.
 
-Test SSH access to the `controller-0` compute instances:
+Test SSH access to the `abell-controller-0` compute instances:
 
 ```
-gcloud compute ssh controller-0
+gcloud compute ssh abell-controller-0
 ```
 
 If this is your first time connecting to a compute instance SSH keys will be generated for you. Enter a passphrase at the prompt to continue:
@@ -205,17 +205,17 @@ Updating project ssh metadata...done.
 Waiting for SSH key to propagate.
 ```
 
-After the SSH keys have been updated you'll be logged into the `controller-0` instance:
+After the SSH keys have been updated you'll be logged into the `abell-controller-0` instance:
 
 ```
 Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-1042-gcp x86_64)
 ...
 ```
 
-Type `exit` at the prompt to exit the `controller-0` compute instance:
+Type `exit` at the prompt to exit the `abell-controller-0` compute instance:
 
 ```
-$USER@controller-0:~$ exit
+$USER@abell-controller-0:~$ exit
 ```
 > output
 

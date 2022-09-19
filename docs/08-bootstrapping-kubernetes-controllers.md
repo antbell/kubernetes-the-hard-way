@@ -4,10 +4,10 @@ In this lab you will bootstrap the Kubernetes control plane across three compute
 
 ## Prerequisites
 
-The commands in this lab must be run on each controller instance: `controller-0`, `controller-1`, and `controller-2`. Login to each controller instance using the `gcloud` command. Example:
+The commands in this lab must be run on each controller instance: `abell-controller-0`, `abell-controller-1`, and `abell-controller-2`. Login to each controller instance using the `gcloud` command. Example:
 
 ```
-gcloud compute ssh controller-0
+gcloud compute ssh abell-controller-0
 ```
 
 ### Running commands in parallel with tmux
@@ -286,7 +286,7 @@ X-Kubernetes-Pf-Prioritylevel-Uid: 8ba5908f-5569-4330-80fd-c643e7512366
 ok
 ```
 
-> Remember to run the above commands on each controller node: `controller-0`, `controller-1`, and `controller-2`.
+> Remember to run the above commands on each controller node: `abell-controller-0`, `abell-controller-1`, and `abell-controller-2`.
 
 ## RBAC for Kubelet Authorization
 
@@ -297,7 +297,7 @@ In this section you will configure RBAC permissions to allow the Kubernetes API 
 The commands in this section will effect the entire cluster and only need to be run once from one of the controller nodes.
 
 ```
-gcloud compute ssh controller-0
+gcloud compute ssh abell-controller-0
 ```
 
 Create the `system:kube-apiserver-to-kubelet` [ClusterRole](https://kubernetes.io/docs/admin/authorization/rbac/#role-and-clusterrole) with permissions to access the Kubelet API and perform most common tasks associated with managing pods:
@@ -379,7 +379,7 @@ Create the external load balancer network resources:
     --http-health-check kubernetes
 
   gcloud compute target-pools add-instances kubernetes-target-pool \
-   --instances controller-0,controller-1,controller-2
+   --instances abell-controller-0,abell-controller-1,abell-controller-2
 
   gcloud compute forwarding-rules create kubernetes-forwarding-rule \
     --address ${KUBERNETES_PUBLIC_ADDRESS} \
