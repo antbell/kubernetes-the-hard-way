@@ -52,9 +52,9 @@ done
 Results:
 
 ```
-worker-0.kubeconfig
-worker-1.kubeconfig
-worker-2.kubeconfig
+abell-worker-0.kubeconfig
+abell-worker-1.kubeconfig
+abell-worker-2.kubeconfig
 ```
 
 ### The kube-proxy Kubernetes Configuration File

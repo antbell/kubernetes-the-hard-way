@@ -151,12 +151,12 @@ done
 Results:
 
 ```
-worker-0-key.pem
-worker-0.pem
-worker-1-key.pem
-worker-1.pem
-worker-2-key.pem
-worker-2.pem
+abell-worker-0-key.pem
+abell-worker-0.pem
+abell-worker-1-key.pem
+abell-worker-1.pem
+abell-worker-2-key.pem
+abell-worker-2.pem
 ```
 
 ### The Controller Manager Client Certificate

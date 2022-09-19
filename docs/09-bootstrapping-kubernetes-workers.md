@@ -305,9 +305,9 @@ gcloud compute ssh abell-controller-0 \
 
 ```
 NAME       STATUS   ROLES    AGE   VERSION
-worker-0   Ready    <none>   22s   v1.21.0
-worker-1   Ready    <none>   22s   v1.21.0
-worker-2   Ready    <none>   22s   v1.21.0
+abell-worker-0   Ready    <none>   22s   v1.21.0
+abell-worker-1   Ready    <none>   22s   v1.21.0
+abell-worker-2   Ready    <none>   22s   v1.21.0
 ```
 
 Next: [Configuring kubectl for Remote Access](10-configuring-kubectl.md)
