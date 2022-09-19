@@ -365,7 +365,7 @@ Create the external load balancer network resources:
     --region $(gcloud config get-value compute/region) \
     --format 'value(address)')
 
-  gcloud compute http-health-checks create kubernetes \
+  gcloud compute http-health-checks create abell-kubernetes \
     --description "Kubernetes Health Check" \
     --host "kubernetes.default.svc.cluster.local" \
     --request-path "/healthz"

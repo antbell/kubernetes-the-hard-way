@@ -24,7 +24,7 @@ Delete the external load balancer network resources:
 
   gcloud -q compute target-pools delete abell-kubernetes-target-pool
 
-  gcloud -q compute http-health-checks delete kubernetes
+  gcloud -q compute http-health-checks delete abell-kubernetes
 
   gcloud -q compute addresses delete abell-kubernetes-tutorial
 }
