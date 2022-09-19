@@ -14,19 +14,19 @@ The Kubernetes [networking model](https://kubernetes.io/docs/concepts/cluster-ad
 
 In this section a dedicated [Virtual Private Cloud](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) (VPC) network will be setup to host the Kubernetes cluster.
 
-Create the `kubernetes-the-hard-way` custom VPC network:
+Create the `abell-kubernetes-tutorial` custom VPC network:
 
 ```
-gcloud compute networks create kubernetes-the-hard-way --subnet-mode custom
+gcloud compute networks create abell-kubernetes-tutorial --subnet-mode custom
 ```
 
 A [subnet](https://cloud.google.com/compute/docs/vpc/#vpc_networks_and_subnets) must be provisioned with an IP address range large enough to assign a private IP address to each node in the Kubernetes cluster.
 
-Create the `kubernetes` subnet in the `kubernetes-the-hard-way` VPC network:
+Create the `kubernetes` subnet in the `abell-kubernetes-tutorial` VPC network:
 
 ```
 gcloud compute networks subnets create kubernetes \
-  --network kubernetes-the-hard-way \
+  --network abell-kubernetes-tutorial \
   --range 10.240.0.0/24
 ```
 
@@ -37,35 +37,35 @@ gcloud compute networks subnets create kubernetes \
 Create a firewall rule that allows internal communication across all protocols:
 
 ```
-gcloud compute firewall-rules create kubernetes-the-hard-way-allow-internal \
+gcloud compute firewall-rules create abell-kubernetes-tutorial-allow-internal \
   --allow tcp,udp,icmp \
-  --network kubernetes-the-hard-way \
+  --network abell-kubernetes-tutorial \
   --source-ranges 10.240.0.0/24,10.200.0.0/16
 ```
 
 Create a firewall rule that allows external SSH, ICMP, and HTTPS:
 
 ```
-gcloud compute firewall-rules create kubernetes-the-hard-way-allow-external \
+gcloud compute firewall-rules create abell-kubernetes-tutorial-allow-external \
   --allow tcp:22,tcp:6443,icmp \
-  --network kubernetes-the-hard-way \
+  --network abell-kubernetes-tutorial \
   --source-ranges 0.0.0.0/0
 ```
 
 > An [external load balancer](https://cloud.google.com/compute/docs/load-balancing/network/) will be used to expose the Kubernetes API Servers to remote clients.
 
-List the firewall rules in the `kubernetes-the-hard-way` VPC network:
+List the firewall rules in the `abell-kubernetes-tutorial` VPC network:
 
 ```
-gcloud compute firewall-rules list --filter="network:kubernetes-the-hard-way"
+gcloud compute firewall-rules list --filter="network:abell-kubernetes-tutorial"
 ```
 
 > output
 
 ```
 NAME                                    NETWORK                  DIRECTION  PRIORITY  ALLOW                 DENY  DISABLED
-kubernetes-the-hard-way-allow-external  kubernetes-the-hard-way  INGRESS    1000      tcp:22,tcp:6443,icmp        False
-kubernetes-the-hard-way-allow-internal  kubernetes-the-hard-way  INGRESS    1000      tcp,udp,icmp                Fals
+abell-kubernetes-tutorial-allow-external  kubernetes-the-hard-way  INGRESS    1000      tcp:22,tcp:6443,icmp        False
+abell-kubernetes-tutorial-allow-internal  kubernetes-the-hard-way  INGRESS    1000      tcp,udp,icmp                Fals
 ```
 
 ### Kubernetes Public IP Address
@@ -73,21 +73,21 @@ kubernetes-the-hard-way-allow-internal  kubernetes-the-hard-way  INGRESS    1000
 Allocate a static IP address that will be attached to the external load balancer fronting the Kubernetes API Servers:
 
 ```
-gcloud compute addresses create kubernetes-the-hard-way \
+gcloud compute addresses create abell-kubernetes-tutorial \
   --region $(gcloud config get-value compute/region)
 ```
 
-Verify the `kubernetes-the-hard-way` static IP address was created in your default compute region:
+Verify the `abell-kubernetes-tutorial` static IP address was created in your default compute region:
 
 ```
-gcloud compute addresses list --filter="name=('kubernetes-the-hard-way')"
+gcloud compute addresses list --filter="name=('abell-kubernetes-tutorial')"
 ```
 
 > output
 
 ```
 NAME                     ADDRESS/RANGE   TYPE      PURPOSE  NETWORK  REGION    SUBNET  STATUS
-kubernetes-the-hard-way  XX.XXX.XXX.XXX  EXTERNAL                    us-west1          RESERVED
+abell-kubernetes-tutorial  XX.XXX.XXX.XXX  EXTERNAL                    us-west1          RESERVED
 ```
 
 ## Compute Instances
@@ -110,7 +110,7 @@ for i in 0 1 2; do
     --private-network-ip 10.240.0.1${i} \
     --scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
     --subnet kubernetes \
-    --tags kubernetes-the-hard-way,controller
+    --tags abell-kubernetes-tutorial,controller
 done
 ```
 
@@ -135,7 +135,7 @@ for i in 0 1 2; do
     --private-network-ip 10.240.0.2${i} \
     --scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
     --subnet kubernetes \
-    --tags kubernetes-the-hard-way,worker
+    --tags abell-kubernetes-tutorial,worker
 done
 ```
 
@@ -144,7 +144,7 @@ done
 List the compute instances in your default compute zone:
 
 ```
-gcloud compute instances list --filter="tags.items=kubernetes-the-hard-way"
+gcloud compute instances list --filter="tags.items=abell-kubernetes-tutorial"
 ```
 
 > output

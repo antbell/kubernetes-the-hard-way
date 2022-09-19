@@ -292,14 +292,14 @@ kube-scheduler.pem
 
 ### The Kubernetes API Server Certificate
 
-The `kubernetes-the-hard-way` static IP address will be included in the list of subject alternative names for the Kubernetes API Server certificate. This will ensure the certificate can be validated by remote clients.
+The `abell-kubernetes-tutorial` static IP address will be included in the list of subject alternative names for the Kubernetes API Server certificate. This will ensure the certificate can be validated by remote clients.
 
 Generate the Kubernetes API Server certificate and private key:
 
 ```
 {
 
-KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe abell-kubernetes-tutorial \
   --region $(gcloud config get-value compute/region) \
   --format 'value(address)')
 

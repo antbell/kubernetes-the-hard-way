@@ -10,10 +10,10 @@ In this section you will generate kubeconfig files for the `controller manager`,
 
 Each kubeconfig requires a Kubernetes API Server to connect to. To support high availability the IP address assigned to the external load balancer fronting the Kubernetes API Servers will be used.
 
-Retrieve the `kubernetes-the-hard-way` static IP address:
+Retrieve the `abell-kubernetes-tutorial` static IP address:
 
 ```
-KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe abell-kubernetes-tutorial \
   --region $(gcloud config get-value compute/region) \
   --format 'value(address)')
 ```
@@ -28,7 +28,7 @@ Generate a kubeconfig file for each worker node:
 
 ```
 for instance in worker-0 worker-1 worker-2; do
-  kubectl config set-cluster kubernetes-the-hard-way \
+  kubectl config set-cluster abell-kubernetes-tutorial \
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
@@ -41,7 +41,7 @@ for instance in worker-0 worker-1 worker-2; do
     --kubeconfig=${instance}.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=abell-kubernetes-tutorial \
     --user=system:node:${instance} \
     --kubeconfig=${instance}.kubeconfig
 
@@ -63,7 +63,7 @@ Generate a kubeconfig file for the `kube-proxy` service:
 
 ```
 {
-  kubectl config set-cluster kubernetes-the-hard-way \
+  kubectl config set-cluster abell-kubernetes-tutorial \
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
@@ -76,7 +76,7 @@ Generate a kubeconfig file for the `kube-proxy` service:
     --kubeconfig=kube-proxy.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=abell-kubernetes-tutorial \
     --user=system:kube-proxy \
     --kubeconfig=kube-proxy.kubeconfig
 
@@ -96,7 +96,7 @@ Generate a kubeconfig file for the `kube-controller-manager` service:
 
 ```
 {
-  kubectl config set-cluster kubernetes-the-hard-way \
+  kubectl config set-cluster abell-kubernetes-tutorial \
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
@@ -109,7 +109,7 @@ Generate a kubeconfig file for the `kube-controller-manager` service:
     --kubeconfig=kube-controller-manager.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=abell-kubernetes-tutorial \
     --user=system:kube-controller-manager \
     --kubeconfig=kube-controller-manager.kubeconfig
 
@@ -130,7 +130,7 @@ Generate a kubeconfig file for the `kube-scheduler` service:
 
 ```
 {
-  kubectl config set-cluster kubernetes-the-hard-way \
+  kubectl config set-cluster abell-kubernetes-tutorial \
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
@@ -143,7 +143,7 @@ Generate a kubeconfig file for the `kube-scheduler` service:
     --kubeconfig=kube-scheduler.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=abell-kubernetes-tutorial \
     --user=system:kube-scheduler \
     --kubeconfig=kube-scheduler.kubeconfig
 
@@ -163,7 +163,7 @@ Generate a kubeconfig file for the `admin` user:
 
 ```
 {
-  kubectl config set-cluster kubernetes-the-hard-way \
+  kubectl config set-cluster abell-kubernetes-tutorial \
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
@@ -176,7 +176,7 @@ Generate a kubeconfig file for the `admin` user:
     --kubeconfig=admin.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=abell-kubernetes-tutorial \
     --user=admin \
     --kubeconfig=admin.kubeconfig
 

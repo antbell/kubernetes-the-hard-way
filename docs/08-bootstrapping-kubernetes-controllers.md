@@ -68,7 +68,7 @@ REGION=$(curl -s -H "Metadata-Flavor: Google" \
 ```
 
 ```
-KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe abell-kubernetes-tutorial \
   --region $REGION \
   --format 'value(address)')
 ```
@@ -350,7 +350,7 @@ EOF
 
 ## The Kubernetes Frontend Load Balancer
 
-In this section you will provision an external load balancer to front the Kubernetes API Servers. The `kubernetes-the-hard-way` static IP address will be attached to the resulting load balancer.
+In this section you will provision an external load balancer to front the Kubernetes API Servers. The `abell-kubernetes-tutorial` static IP address will be attached to the resulting load balancer.
 
 > The compute instances created in this tutorial will not have permission to complete this section. **Run the following commands from the same machine used to create the compute instances**.
 
@@ -361,7 +361,7 @@ Create the external load balancer network resources:
 
 ```
 {
-  KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+  KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe abell-kubernetes-tutorial \
     --region $(gcloud config get-value compute/region) \
     --format 'value(address)')
 
@@ -370,8 +370,8 @@ Create the external load balancer network resources:
     --host "kubernetes.default.svc.cluster.local" \
     --request-path "/healthz"
 
-  gcloud compute firewall-rules create kubernetes-the-hard-way-allow-health-check \
-    --network kubernetes-the-hard-way \
+  gcloud compute firewall-rules create abell-kubernetes-tutorial-allow-health-check \
+    --network abell-kubernetes-tutorial \
     --source-ranges 209.85.152.0/22,209.85.204.0/22,35.191.0.0/16 \
     --allow tcp
 
@@ -393,10 +393,10 @@ Create the external load balancer network resources:
 
 > The compute instances created in this tutorial will not have permission to complete this section. **Run the following commands from the same machine used to create the compute instances**.
 
-Retrieve the `kubernetes-the-hard-way` static IP address:
+Retrieve the `abell-kubernetes-tutorial` static IP address:
 
 ```
-KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe abell-kubernetes-tutorial \
   --region $(gcloud config get-value compute/region) \
   --format 'value(address)')
 ```
