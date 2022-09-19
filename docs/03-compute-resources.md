@@ -124,7 +124,7 @@ Create three compute instances which will host the Kubernetes worker nodes:
 
 ```
 for i in 0 1 2; do
-  gcloud compute instances create worker-${i} \
+  gcloud compute instances create abell-worker-${i} \
     --async \
     --boot-disk-size 200GB \
     --can-ip-forward \

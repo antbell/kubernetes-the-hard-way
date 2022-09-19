@@ -13,7 +13,7 @@ In this section you will gather the information required to create routes in the
 Print the internal IP address and Pod CIDR range for each worker instance:
 
 ```
-for instance in worker-0 worker-1 worker-2; do
+for instance in abell-worker-0 abell-worker-1 abell-worker-2; do
   gcloud compute instances describe ${instance} \
     --format 'value[separator=" "](networkInterfaces[0].networkIP,metadata.items[0].value)'
 done

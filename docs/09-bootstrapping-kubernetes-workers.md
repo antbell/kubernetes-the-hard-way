@@ -4,10 +4,10 @@ In this lab you will bootstrap three Kubernetes worker nodes. The following comp
 
 ## Prerequisites
 
-The commands in this lab must be run on each worker instance: `worker-0`, `worker-1`, and `worker-2`. Login to each worker instance using the `gcloud` command. Example:
+The commands in this lab must be run on each worker instance: `abell-worker-0`, `abell-worker-1`, and `abell-worker-2`. Login to each worker instance using the `gcloud` command. Example:
 
 ```
-gcloud compute ssh worker-0
+gcloud compute ssh abell-worker-0
 ```
 
 ### Running commands in parallel with tmux
@@ -288,7 +288,7 @@ EOF
 }
 ```
 
-> Remember to run the above commands on each worker node: `worker-0`, `worker-1`, and `worker-2`.
+> Remember to run the above commands on each worker node: `abell-worker-0`, `abell-worker-1`, and `abell-worker-2`.
 
 ## Verification
 

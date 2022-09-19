@@ -27,7 +27,7 @@ When generating kubeconfig files for Kubelets the client certificate matching th
 Generate a kubeconfig file for each worker node:
 
 ```
-for instance in worker-0 worker-1 worker-2; do
+for instance in abell-worker-0 abell-worker-1 abell-worker-2; do
   kubectl config set-cluster abell-kubernetes-tutorial \
     --certificate-authority=ca.pem \
     --embed-certs=true \
@@ -198,7 +198,7 @@ admin.kubeconfig
 Copy the appropriate `kubelet` and `kube-proxy` kubeconfig files to each worker instance:
 
 ```
-for instance in worker-0 worker-1 worker-2; do
+for instance in abell-worker-0 abell-worker-1 abell-worker-2; do
   gcloud compute scp ${instance}.kubeconfig kube-proxy.kubeconfig ${instance}:~/
 done
 ```

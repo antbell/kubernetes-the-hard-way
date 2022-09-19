@@ -193,7 +193,7 @@ gcloud compute firewall-rules create abell-kubernetes-tutorial-allow-nginx-servi
 Retrieve the external IP address of a worker instance:
 
 ```
-EXTERNAL_IP=$(gcloud compute instances describe worker-0 \
+EXTERNAL_IP=$(gcloud compute instances describe abell-worker-0 \
   --format 'value(networkInterfaces[0].accessConfigs[0].natIP)')
 ```
 

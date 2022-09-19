@@ -9,7 +9,7 @@ Delete the controller and worker compute instances:
 ```
 gcloud -q compute instances delete \
   abell-controller-0 abell-controller-1 abell-controller-2 \
-  worker-0 worker-1 worker-2 \
+  abell-worker-0 abell-worker-1 abell-worker-2 \
   --zone $(gcloud config get-value compute/zone)
 ```
 
