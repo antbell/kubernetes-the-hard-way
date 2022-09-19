@@ -381,7 +381,7 @@ Create the external load balancer network resources:
   gcloud compute target-pools add-instances abell-kubernetes-target-pool \
    --instances abell-controller-0,abell-controller-1,abell-controller-2
 
-  gcloud compute forwarding-rules create kubernetes-forwarding-rule \
+  gcloud compute forwarding-rules create abell-kubernetes-forwarding-rule \
     --address ${KUBERNETES_PUBLIC_ADDRESS} \
     --ports 6443 \
     --region $(gcloud config get-value compute/region) \
